@@ -63,7 +63,9 @@ const createPhotoDescription = function (index) {
   };
 };
 
-const getPhotoDescription = function () {return Array.from ({length: PHOTO_COUNT}, (_, pictureIndex) => createPhotoDescription(++pictureIndex));};
+const getPhotoDescription = function () {
+  return Array.from ({length: PHOTO_COUNT}, (_, pictureIndex) => createPhotoDescription(++pictureIndex));
+};
 
 getPhotoDescription();
 
