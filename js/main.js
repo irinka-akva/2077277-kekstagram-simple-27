@@ -1,4 +1,6 @@
-import {getPhotoDescription} from './data.js';
+import {
+  getPhotoDescription
+} from './data.js';
 
 getPhotoDescription();
 
