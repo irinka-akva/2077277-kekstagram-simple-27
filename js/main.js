@@ -3,9 +3,9 @@ import {
 } from './data.js';
 
 import {
-  renderPicturesList
+  renderPictureList
 } from './pictures.js';
 
-getPhotoDescription();
-renderPicturesList();
+const pictureData = getPhotoDescription();
+renderPictureList(pictureData);
 

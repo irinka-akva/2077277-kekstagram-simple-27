@@ -1,22 +1,17 @@
-import {getPhotoDescription} from './data.js';
-
-const picturesList = document.querySelector('.pictures');
+const pictureList = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-const fullPicturesList = getPhotoDescription;
-const picturesListFragment = document.createDocumentFragment();
-
-const renderPicturesList = function () {
-  fullPicturesList.forEach(({url, comments, likes}) => {
+const renderPictureList = function (pictureData) {
+  const pictureListFragment = document.createDocumentFragment();
+  pictureData.forEach(({url, comments, likes}) => {
     const pictureElement = pictureTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = url;
     pictureElement.querySelector('.picture__comments').textContent = comments;
     pictureElement.querySelector('.picture__likes').textContent = likes;
-    picturesListFragment.append(pictureElement);
+    pictureListFragment.append(pictureElement);
+    pictureList.append(pictureListFragment);
   });
 };
 
-picturesList.append(picturesListFragment);
-
-export {renderPicturesList};
+export {renderPictureList};
 
