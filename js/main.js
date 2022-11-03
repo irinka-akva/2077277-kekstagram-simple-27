@@ -2,5 +2,10 @@ import {
   getPhotoDescription
 } from './data.js';
 
-getPhotoDescription();
+import {
+  renderPictureList
+} from './pictures.js';
+
+const pictureData = getPhotoDescription();
+renderPictureList(pictureData);
 
