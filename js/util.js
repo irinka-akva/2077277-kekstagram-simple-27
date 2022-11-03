@@ -18,8 +18,10 @@ const getRandomArrayElement = function (elements) {
   return elements[getRandomPositiveInteger (0, elements.length - 1)];
 };
 
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
 export {
   getRandomPositiveInteger,
-  getRandomArrayElement
+  getRandomArrayElement, isEscapeKey
 };
 
