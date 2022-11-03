@@ -9,8 +9,8 @@ const renderPictureList = function (pictureData) {
     pictureElement.querySelector('.picture__comments').textContent = comments;
     pictureElement.querySelector('.picture__likes').textContent = likes;
     pictureListFragment.append(pictureElement);
-    pictureList.append(pictureListFragment);
   });
+  pictureList.append(pictureListFragment);
 };
 
 export {renderPictureList};
