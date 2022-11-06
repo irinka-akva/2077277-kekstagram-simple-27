@@ -1,4 +1,7 @@
-import {isEscapeKey} from './util.js';
+import {
+  isEscapeKey,
+  isActiveBlock
+} from './util.js';
 
 const modalForm = document.querySelector('.img-upload__form');
 const uploadFileElement = document.querySelector('#upload-file');
@@ -6,34 +9,51 @@ const userModalElement = document.querySelector('.img-upload__overlay');
 const modalCloseElement = document.querySelector('#upload-cancel');
 const bodyElement = document.body;
 
-const onModalEscKeydown = function (evt) {
-  if (isEscapeKey(evt)) {
-    modalForm.reset();
-    userModalElement.classList.add('hidden');
-    bodyElement.classList.remove('modal-open');
-
-  }
-};
-
 const openModalElement = function () {
-  uploadFileElement.addEventListener('change', () => {
-    userModalElement.classList.remove('hidden');
-    bodyElement.classList.add('modal-open');
-
-    document.addEventListener('keydown', onModalEscKeydown);
-  });
+  isActiveBlock(userModalElement, 'remove', 'hidden');
+  isActiveBlock(bodyElement, 'add', 'modal-open');
 };
 
 const closeModalElement = function () {
-  modalCloseElement.addEventListener('click', () => {
-    userModalElement.classList.add('hidden');
-    bodyElement.classList.remove('modal-open');
-
-    document.removeEventListener('keydown', onModalEscKeydown);
-  });
+  isActiveBlock(userModalElement, 'add', 'hidden');
+  isActiveBlock(bodyElement, 'remove', 'modal-open');
 };
 
-export {
-  openModalElement,
-  closeModalElement,
+const resetAndCloseModalElement = function () {
+  modalForm.reset();
+  closeModalElement();
 };
+
+const closeModalByEscape = function (evt) {
+  evt.preventDefault();
+  resetAndCloseModalElement();
+};
+
+const handlerEventUploadImg = function (evt) {
+  switch (evt.type) {
+    case 'click':
+      resetAndCloseModalElement();
+      modalCloseElement.removeEventListener('click', handlerEventUploadImg);
+      document.removeEventListener('keydown', handlerEventUploadImg);
+      break;
+    case 'keydown':
+      if (!isEscapeKey(evt)) {
+        return;
+      }
+      closeModalByEscape(evt);
+      modalCloseElement.removeEventListener('click', handlerEventUploadImg);
+      document.removeEventListener('keydown', handlerEventUploadImg);
+      break;
+    default:
+      resetAndCloseModalElement();
+      break;
+  }
+};
+
+const handlerUploadImg = function () {
+  openModalElement();
+  modalCloseElement.addEventListener('click', handlerEventUploadImg);
+  document.addEventListener('keydown', handlerEventUploadImg);
+};
+
+uploadFileElement.addEventListener('change', handlerUploadImg);

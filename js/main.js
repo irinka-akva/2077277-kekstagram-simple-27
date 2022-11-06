@@ -6,14 +6,7 @@ import {
   renderPictureList
 } from './pictures.js';
 
-import {
-  openModalElement,
-  closeModalElement,
-} from './modal.js';
+import './modal.js';
 
 const pictureData = getPhotoDescription();
 renderPictureList(pictureData);
-openModalElement();
-closeModalElement();
-
-
