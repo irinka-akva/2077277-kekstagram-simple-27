@@ -3,6 +3,14 @@ import {
   isActiveBlock
 } from './util.js';
 
+import {
+  resetScaleInput
+} from './scale.js';
+
+import {
+  resetEffect
+} from './effects.js';
+
 const modalForm = document.querySelector('.img-upload__form');
 const uploadFileElement = document.querySelector('#upload-file');
 const userModalElement = document.querySelector('.img-upload__overlay');
@@ -21,6 +29,8 @@ const closeModalElement = function () {
 
 const resetAndCloseModalElement = function () {
   modalForm.reset();
+  resetScaleInput();
+  resetEffect();
   closeModalElement();
 };
 
@@ -29,20 +39,20 @@ const closeModalByEscape = function (evt) {
   resetAndCloseModalElement();
 };
 
-const handlerEventUploadImg = function (evt) {
+const imgEventUploadHandler = function (evt) {
   switch (evt.type) {
     case 'click':
       resetAndCloseModalElement();
-      modalCloseElement.removeEventListener('click', handlerEventUploadImg);
-      document.removeEventListener('keydown', handlerEventUploadImg);
+      modalCloseElement.removeEventListener('click', imgEventUploadHandler);
+      document.removeEventListener('keydown', imgEventUploadHandler);
       break;
     case 'keydown':
       if (!isEscapeKey(evt)) {
         return;
       }
       closeModalByEscape(evt);
-      modalCloseElement.removeEventListener('click', handlerEventUploadImg);
-      document.removeEventListener('keydown', handlerEventUploadImg);
+      modalCloseElement.removeEventListener('click', imgEventUploadHandler);
+      document.removeEventListener('keydown', imgEventUploadHandler);
       break;
     default:
       resetAndCloseModalElement();
@@ -50,10 +60,10 @@ const handlerEventUploadImg = function (evt) {
   }
 };
 
-const handlerUploadImg = function () {
+const imgUploadHandler = function () {
   openModalElement();
-  modalCloseElement.addEventListener('click', handlerEventUploadImg);
-  document.addEventListener('keydown', handlerEventUploadImg);
+  modalCloseElement.addEventListener('click', imgEventUploadHandler);
+  document.addEventListener('keydown', imgEventUploadHandler);
 };
 
-uploadFileElement.addEventListener('change', handlerUploadImg);
+uploadFileElement.addEventListener('change', imgUploadHandler);

@@ -8,5 +8,11 @@ import {
 
 import './modal.js';
 
+import './scale.js';
+
+import './effects.js';
+
 const pictureData = getPhotoDescription();
 renderPictureList(pictureData);
+
+
