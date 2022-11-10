@@ -14,5 +14,3 @@ import './effects.js';
 
 const pictureData = getPhotoDescription();
 renderPictureList(pictureData);
-
-

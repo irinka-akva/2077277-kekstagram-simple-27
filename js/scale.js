@@ -1,5 +1,3 @@
-const zoomInButton = document.querySelector ('.scale__control--bigger');
-const zoomOutButton = document.querySelector ('.scale__control--smaller');
 const scaleInput = document.querySelector ('.scale__control--value');
 const photoPreview = document.querySelector ('.img-upload__preview img');
 
@@ -35,10 +33,8 @@ const resetScaleInput = function () {
   scalePhotoPreview();
 };
 
-zoomOutButton.addEventListener ('click', zoomOutButtonClickHandler);
-zoomInButton.addEventListener ('click', zoomInButtonClickHandler);
-
-
 export {
-  resetScaleInput
+  resetScaleInput,
+  zoomOutButtonClickHandler,
+  zoomInButtonClickHandler
 };

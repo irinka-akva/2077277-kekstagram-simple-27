@@ -4,11 +4,14 @@ import {
 } from './util.js';
 
 import {
-  resetScaleInput
+  resetScaleInput,
+  zoomOutButtonClickHandler,
+  zoomInButtonClickHandler
 } from './scale.js';
 
 import {
-  resetEffect
+  resetEffect,
+  formChangeHandler
 } from './effects.js';
 
 const modalForm = document.querySelector('.img-upload__form');
@@ -16,6 +19,8 @@ const uploadFileElement = document.querySelector('#upload-file');
 const userModalElement = document.querySelector('.img-upload__overlay');
 const modalCloseElement = document.querySelector('#upload-cancel');
 const bodyElement = document.body;
+const zoomInButton = document.querySelector ('.scale__control--bigger');
+const zoomOutButton = document.querySelector ('.scale__control--smaller');
 
 const openModalElement = function () {
   isActiveBlock(userModalElement, 'remove', 'hidden');
@@ -45,6 +50,9 @@ const imgEventUploadHandler = function (evt) {
       resetAndCloseModalElement();
       modalCloseElement.removeEventListener('click', imgEventUploadHandler);
       document.removeEventListener('keydown', imgEventUploadHandler);
+      zoomInButton.removeEventListener('click', zoomInButtonClickHandler);
+      zoomOutButton.removeEventListener('click', zoomOutButtonClickHandler);
+      modalForm.removeEventListener('change', formChangeHandler);
       break;
     case 'keydown':
       if (!isEscapeKey(evt)) {
@@ -53,6 +61,9 @@ const imgEventUploadHandler = function (evt) {
       closeModalByEscape(evt);
       modalCloseElement.removeEventListener('click', imgEventUploadHandler);
       document.removeEventListener('keydown', imgEventUploadHandler);
+      zoomInButton.removeEventListener('click', zoomInButtonClickHandler);
+      zoomOutButton.removeEventListener('click', zoomOutButtonClickHandler);
+      modalForm.removeEventListener('change', formChangeHandler);
       break;
     default:
       resetAndCloseModalElement();
@@ -64,6 +75,9 @@ const imgUploadHandler = function () {
   openModalElement();
   modalCloseElement.addEventListener('click', imgEventUploadHandler);
   document.addEventListener('keydown', imgEventUploadHandler);
+  zoomOutButton.addEventListener ('click', zoomOutButtonClickHandler);
+  zoomInButton.addEventListener ('click', zoomInButtonClickHandler);
+  modalForm.addEventListener('change', formChangeHandler);
 };
 
 uploadFileElement.addEventListener('change', imgUploadHandler);

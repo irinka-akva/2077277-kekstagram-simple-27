@@ -1,5 +1,4 @@
 const photoPreview = document.querySelector ('.img-upload__preview img');
-const modalForm = document.querySelector('.img-upload__form');
 const effectLevel = document.querySelector('.effect-level__value');
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 
@@ -112,9 +111,9 @@ noUiSlider.create(effectLevelSlider, {
 });
 updateSlider();
 
-modalForm.addEventListener('change', formChangeHandler);
 effectLevelSlider.noUiSlider.on('update', sliderUpdateHandler);
 
 export {
-  resetEffect
+  resetEffect,
+  formChangeHandler
 };
