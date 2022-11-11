@@ -19,8 +19,8 @@ const uploadFileElement = document.querySelector('#upload-file');
 const userModalElement = document.querySelector('.img-upload__overlay');
 const modalCloseElement = document.querySelector('#upload-cancel');
 const bodyElement = document.body;
-const zoomInButton = document.querySelector ('.scale__control--bigger');
-const zoomOutButton = document.querySelector ('.scale__control--smaller');
+const zoomInButton = document.querySelector('.scale__control--bigger');
+const zoomOutButton = document.querySelector('.scale__control--smaller');
 
 const openModalElement = function () {
   isActiveBlock(userModalElement, 'remove', 'hidden');

@@ -1,5 +1,5 @@
-const scaleInput = document.querySelector ('.scale__control--value');
-const photoPreview = document.querySelector ('.img-upload__preview img');
+const scaleInput = document.querySelector('.scale__control--value');
+const photoPreview = document.querySelector('.img-upload__preview img');
 
 const SCALE_STEP = 25;
 const MIN_SCALE = 25;
