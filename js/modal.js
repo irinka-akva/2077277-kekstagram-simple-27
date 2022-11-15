@@ -14,6 +14,10 @@ import {
   formChangeHandler
 } from './effects.js';
 
+import {
+  sendData
+} from './api.js';
+
 const modalForm = document.querySelector('.img-upload__form');
 const uploadFileElement = document.querySelector('#upload-file');
 const userModalElement = document.querySelector('.img-upload__overlay');
@@ -21,6 +25,9 @@ const modalCloseElement = document.querySelector('#upload-cancel');
 const bodyElement = document.body;
 const zoomInButton = document.querySelector('.scale__control--bigger');
 const zoomOutButton = document.querySelector('.scale__control--smaller');
+const modalSubmitButton = document.querySelector('#upload-submit');
+const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
+const failMessageTemplate = document.querySelector('#error').content.querySelector('.error');
 
 const openModalElement = function () {
   isActiveBlock(userModalElement, 'remove', 'hidden');
@@ -81,3 +88,82 @@ const imgUploadHandler = function () {
 };
 
 uploadFileElement.addEventListener('change', imgUploadHandler);
+
+const blocModalSubmitButton = function () {
+  modalSubmitButton.disabled = true;
+  modalSubmitButton.textContent = 'Публикуется...';
+};
+
+const unblockModalSubmitButton = function () {
+  modalSubmitButton.disabled = false;
+  modalSubmitButton.textContent = 'Опубликовать';
+};
+
+const messageClickHandler = function () {
+  hideMessage();
+};
+
+const messageEscKeydownHandler = function (evt) {
+  if (isEscapeKey(evt)){
+    evt.preventDefault();
+    hideMessage();
+  }
+};
+
+function hideMessage () {
+  const messageElement = document.querySelector('.success') || document.querySelector('.error');
+  messageElement.remove();
+  document.removeEventListener('click', messageClickHandler);
+  document.removeEventListener('keydown', messageEscKeydownHandler);
+}
+
+const renderSuccessMessage = function () {
+  const successMessage = successMessageTemplate.cloneNode(true);
+  document.body.append(successMessage);
+  successMessage.querySelector('.success__button').addEventListener('click', messageClickHandler);
+  document.addEventListener('keydown', messageEscKeydownHandler);
+  document.addEventListener('click', (evt) => {
+    const clickOnMessage = evt.composedPath().includes(successMessage.querySelector('.success'));
+    if (!clickOnMessage) {
+      messageClickHandler();
+    }
+  });
+};
+
+const renderFailMessage = function () {
+  const failMessage = failMessageTemplate.cloneNode(true);
+  document.body.append(failMessage);
+  failMessage.querySelector('.error__button').addEventListener('click', messageClickHandler);
+  document.addEventListener('keydown', messageEscKeydownHandler);
+  document.addEventListener('click', (evt) => {
+    const clickOnMessage = evt.composedPath().includes(failMessage.querySelector('.error'));
+    if (!clickOnMessage) {
+      messageClickHandler();
+    }
+  });
+};
+
+const setModalFormSubmit = function (onSuccess) {
+  modalForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    blocModalSubmitButton();
+    sendData(
+      () => {
+        onSuccess();
+        unblockModalSubmitButton();
+        modalForm.reset();
+        renderSuccessMessage();
+      },
+      () => {
+        renderFailMessage();
+        unblockModalSubmitButton();
+      },
+      new FormData(evt.target),
+    );
+  });
+};
+
+export {
+  closeModalElement,
+  setModalFormSubmit
+};
