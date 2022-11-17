@@ -14,4 +14,3 @@ function renderPictureList (pictureData) {
 }
 
 export { renderPictureList };
-
