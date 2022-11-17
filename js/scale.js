@@ -6,35 +6,31 @@ const MIN_SCALE = 25;
 const MAX_SCALE = 100;
 const DEFAULT_SCALE = 100;
 
-const scalePhotoPreview = function (value = DEFAULT_SCALE) {
+function scalePhotoPreview (value = DEFAULT_SCALE) {
   photoPreview.style.transform = `scale(${value / 100})`;
   scaleInput.value = `${value}%`;
-};
+}
 
-const zoomOutButtonClickHandler = function () {
+function zoomOutButtonClickHandler () {
   const currentValue = parseInt(scaleInput.value, 10);
   let newValue = currentValue - SCALE_STEP;
   if (newValue < MIN_SCALE) {
     newValue = MIN_SCALE;
   }
   scalePhotoPreview(newValue);
-};
+}
 
-const zoomInButtonClickHandler = function () {
+function zoomInButtonClickHandler () {
   const currentValue = parseInt(scaleInput.value, 10);
   let newValue = currentValue + SCALE_STEP;
   if (newValue > MAX_SCALE) {
     newValue = MAX_SCALE;
   }
   scalePhotoPreview(newValue);
-};
+}
 
-const resetScaleInput = function () {
+function resetScaleInput () {
   scalePhotoPreview();
-};
+}
 
-export {
-  resetScaleInput,
-  zoomOutButtonClickHandler,
-  zoomInButtonClickHandler
-};
+export { resetScaleInput, zoomOutButtonClickHandler, zoomInButtonClickHandler };

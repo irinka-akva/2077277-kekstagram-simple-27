@@ -1,7 +1,7 @@
 const pictureList = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-const renderPictureList = function (pictureData) {
+function renderPictureList (pictureData) {
   const pictureListFragment = document.createDocumentFragment();
   pictureData.forEach(({url, comments, likes}) => {
     const pictureElement = pictureTemplate.cloneNode(true);
@@ -11,7 +11,6 @@ const renderPictureList = function (pictureData) {
     pictureListFragment.append(pictureElement);
   });
   pictureList.append(pictureListFragment);
-};
+}
 
-export {renderPictureList};
-
+export { renderPictureList };

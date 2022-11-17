@@ -1,16 +1,9 @@
-import {
-  getPhotoDescription
-} from './data.js';
-
-import {
-  renderPictureList
-} from './pictures.js';
-
 import './modal.js';
-
 import './scale.js';
-
 import './effects.js';
+import { setModalFormSubmit } from './modal.js';
+import { getData } from './api.js';
+import { renderPictureList } from './pictures.js';
 
-const pictureData = getPhotoDescription();
-renderPictureList(pictureData);
+setModalFormSubmit();
+getData(renderPictureList);
