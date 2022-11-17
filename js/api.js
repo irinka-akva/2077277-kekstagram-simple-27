@@ -1,17 +1,21 @@
 const ALERT_SHOW_TIME = 10000;
 
-const showAlert = function (message) {
+function showAlert (message) {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = '100';
   alertContainer.style.position = 'absolute';
-  alertContainer.style.left = '300px';
+  alertContainer.style.left = '0px';
   alertContainer.style.top = '0px';
-  alertContainer.style.right = '300px';
-  alertContainer.style.padding = '50px 3px';
+  alertContainer.style.bottom = '0px';
+  alertContainer.style.right = '0px';
+  alertContainer.style.height = '600px';
+  alertContainer.style.width = '600px';
+  alertContainer.style.margin = 'auto';
+  alertContainer.style.padding = '300px 3px';
   alertContainer.style.fontSize = '30px';
   alertContainer.style.textAlign = 'center';
+  alertContainer.style.verticalAlign = 'center';
   alertContainer.style.backgroundColor = 'tomato';
-
   alertContainer.textContent = message;
 
   document.body.append(alertContainer);
@@ -19,9 +23,9 @@ const showAlert = function (message) {
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
-};
+}
 
-const getData = function (onSuccess) {
+function getData (onSuccess) {
   fetch ('https://27.javascript.pages.academy/kekstagram-simple/data')
     .then ((response) => response.json())
     .then ((photos) => {
@@ -30,9 +34,9 @@ const getData = function (onSuccess) {
     .catch(() => {
       showAlert('Ошибка загрузки данных!');
     });
-};
+}
 
-const sendData = function (onSuccess, onFail, body) {
+function sendData (onSuccess, onFail, body) {
   fetch ('https://27.javascript.pages.academy/kekstagram-simple', {
     method: 'POST',
     body,
@@ -47,9 +51,6 @@ const sendData = function (onSuccess, onFail, body) {
     .catch(() => {
       onFail();
     });
-};
+}
 
-export {
-  getData,
-  sendData
-};
+export { getData, sendData };

@@ -1,21 +1,9 @@
 import './modal.js';
-
-import {
-  closeModalElement,
-  setModalFormSubmit
-} from './modal.js';
-
 import './scale.js';
-
 import './effects.js';
+import { setModalFormSubmit } from './modal.js';
+import { getData } from './api.js';
+import { renderPictureList } from './pictures.js';
 
-import {
-  getData
-} from './api.js';
-
-import {
-  renderPictureList
-} from './pictures.js';
-
-setModalFormSubmit(closeModalElement);
+setModalFormSubmit();
 getData(renderPictureList);

@@ -54,11 +54,11 @@ const EFFECTS = [
 const DEFAULT_EFFECT = EFFECTS[0];
 let currentEffect = DEFAULT_EFFECT;
 
-const isDefault = function () {
+function isDefault () {
   return currentEffect === DEFAULT_EFFECT;
-};
+}
 
-const updateSlider = function () {
+function updateSlider () {
   effectLevelSlider.classList.remove('hidden');
   effectLevelSlider.noUiSlider.updateOptions({
     range: {
@@ -71,18 +71,18 @@ const updateSlider = function () {
   if (isDefault()) {
     effectLevelSlider.classList.add('hidden');
   }
-};
+}
 
-const formChangeHandler = function (evt) {
+function formChangeHandler (evt) {
   if (!evt.target.classList.contains('effects__radio')) {
     return;
   }
   currentEffect = EFFECTS.find((effect) =>
     effect.name === evt.target.value);
   updateSlider();
-};
+}
 
-const sliderUpdateHandler = function () {
+function sliderUpdateHandler () {
   photoPreview.style.filter = 'none';
   photoPreview.className = '';
   effectLevel.value = '';
@@ -93,12 +93,12 @@ const sliderUpdateHandler = function () {
   photoPreview.style.filter = `${currentEffect.style}(${sliderValue}${currentEffect.unit})`;
   photoPreview.classList.add(`effects__preview--${currentEffect.name}`);
   effectLevel.value = sliderValue;
-};
+}
 
-const resetEffect = function () {
+function resetEffect () {
   currentEffect = DEFAULT_EFFECT;
   updateSlider();
-};
+}
 
 noUiSlider.create(effectLevelSlider, {
   range: {
@@ -113,7 +113,4 @@ updateSlider();
 
 effectLevelSlider.noUiSlider.on('update', sliderUpdateHandler);
 
-export {
-  resetEffect,
-  formChangeHandler
-};
+export { resetEffect, formChangeHandler };
