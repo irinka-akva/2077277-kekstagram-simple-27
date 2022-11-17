@@ -1,6 +1,6 @@
-const isEscapeKey = function (evt) {
+function isEscapeKey (evt) {
   return evt.key === 'Escape';
-};
+}
 
 function isActiveBlock (element, method, className) {
   element.classList[method](className);

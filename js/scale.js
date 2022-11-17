@@ -33,4 +33,4 @@ function resetScaleInput () {
   scalePhotoPreview();
 }
 
-export { resetScaleInput, zoomOutButtonClickHandler, zoomInButtonClickHandler};
+export { resetScaleInput, zoomOutButtonClickHandler, zoomInButtonClickHandler };
